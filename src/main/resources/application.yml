@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: wallet.management
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wallet_management?useSSL=false&allowPublicKeyRetrieval=true
+    username: Saivarma
+    password: ""
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  redis:
+    host: 172.21.123.22
+    port: 6379
+
+  kafka:
+    bootstrap-servers: 172.21.123.22:9092
+    consumer:
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: in.pinnacle.apps.wallet.api.util.dto
+
+server:
+  port: 8081
