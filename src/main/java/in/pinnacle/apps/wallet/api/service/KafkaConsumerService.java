@@ -41,7 +41,8 @@ public class KafkaConsumerService {
             if (txnDto.getWalletAmount().signum() < 0)
                 walletTransactionService.addTransaction(txnDto, true);
             else
-                walletService.updateWalletMaster(wallet, txnDto.getTransactionAmount(), txnDto.getCreatedAt());
+                walletService.updateWalletMaster(wallet, txnDto.getTransactionType() == TransactionType.CREDIT ? 
+                        txnDto.getTransactionAmount() : txnDto.getTransactionAmount().negate(), txnDto.getCreatedAt());
             // Acknowledge message
             acknowledgment.acknowledge();
         } catch (Exception e) {
